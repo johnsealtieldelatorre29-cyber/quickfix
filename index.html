@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickFix Mobile Repair Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B2540;
+    --navy-2:#123456;
+    --blue:#1C63B7;
+    --blue-light:#4C8FDB;
+    --orange:#E8722C;
+    --orange-light:#F3934F;
+    --ice:#F5F8FB;
+    --white:#FFFFFF;
+    --slate:#55677A;
+    --slate-dark:#2B3A4A;
+    --line:#DCE4EC;
+    --radius:14px;
+    --shadow: 0 12px 30px -14px rgba(11,37,64,0.25);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--slate-dark);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk',sans-serif;
+    color:var(--navy);
+    line-height:1.15;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+  :focus-visible{outline:3px solid var(--orange);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+    max-width:1140px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand img{height:42px; width:42px; object-fit:contain;}
+  .brand span{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.05rem; color:var(--navy);}
+  .brand span em{color:var(--orange); font-style:normal;}
+  nav.links{display:flex; gap:32px; align-items:center;}
+  nav.links a{
+    font-size:0.92rem; font-weight:500; color:var(--slate-dark);
+    position:relative; padding:4px 0;
+  }
+  nav.links a:hover{color:var(--blue);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:999px;
+    font-weight:600; font-size:0.9rem;
+    border:none; cursor:pointer;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary{background:var(--orange); color:#fff; box-shadow:0 8px 20px -8px rgba(232,114,44,0.6);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 12px 24px -8px rgba(232,114,44,0.7);}
+  .btn-ghost{background:transparent; color:var(--navy); border:1.5px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--blue); color:var(--blue);}
+  .menu-toggle{display:none; background:none; border:none; cursor:pointer; padding:6px;}
+  .menu-toggle span{display:block; width:24px; height:2px; background:var(--navy); margin:5px 0; border-radius:2px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    background:linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 55%, var(--blue) 130%);
+    color:#fff;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 40px);
+    pointer-events:none;
+  }
+  .hero-inner{
+    max-width:720px; margin:0 auto; padding:110px 24px 120px;
+    text-align:center;
+    position:relative;
+  }
+  .hero-inner .lede{margin-left:auto; margin-right:auto;}
+  .hero-ctas{justify-content:center;}
+  .hero-badges{justify-content:center;}
+  .hero-badge{align-items:center;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:0.74rem; color:var(--orange-light);
+    margin-bottom:20px;
+  }
+  .eyebrow::before{content:"⚡"; font-size:0.9rem;}
+  .hero h1{
+    font-size:clamp(2.1rem, 4.4vw, 3.4rem);
+    color:#fff;
+    margin-bottom:20px;
+  }
+  .hero h1 .split{
+    background:linear-gradient(95deg, var(--orange-light), var(--blue-light));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.lede{
+    font-size:1.08rem; color:#C6D3E0; max-width:480px; margin-bottom:34px; line-height:1.6;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:46px;}
+  .btn-outline-light{
+    background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,0.35);
+  }
+  .btn-outline-light:hover{border-color:#fff;}
+  .hero-badges{display:flex; gap:28px; flex-wrap:wrap;}
+  .hero-badge{display:flex; flex-direction:column; gap:2px;}
+  .hero-badge .num{font-family:'IBM Plex Mono',monospace; color:var(--orange-light); font-size:0.95rem; font-weight:600;}
+  .hero-badge .lab{font-size:0.76rem; color:#9FB3C6;}
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust-strip{
+    background:var(--ice); border-bottom:1px solid var(--line);
+  }
+  .trust-inner{
+    max-width:1140px; margin:0 auto; padding:22px 24px;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+  }
+  .trust-item{display:flex; align-items:center; gap:12px;}
+  .trust-item svg{flex-shrink:0;}
+  .trust-item .t{font-size:0.86rem; font-weight:600; color:var(--navy);}
+  .trust-item .s{font-size:0.74rem; color:var(--slate);}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{padding:96px 0;}
+  .section-head{max-width:600px; margin-bottom:52px;}
+  .section-head .mono.tag{
+    color:var(--orange); font-size:0.72rem; font-weight:600; margin-bottom:14px; display:block;
+  }
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.3rem); margin-bottom:14px;}
+  .section-head p{color:var(--slate); font-size:1.02rem; line-height:1.6;}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  .service-card{
+    border:1px solid var(--line); border-radius:var(--radius);
+    padding:30px 26px; background:#fff;
+    transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    display:flex; flex-direction:column;
+  }
+  .service-card:hover{
+    transform:translateY(-4px); box-shadow:var(--shadow); border-color:transparent;
+  }
+  .service-icon{
+    width:52px; height:52px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:20px;
+  }
+  .service-card h3{font-size:1.12rem; margin-bottom:10px;}
+  .service-card p{font-size:0.9rem; color:var(--slate); line-height:1.6; margin-bottom:16px;}
+  .service-card .tag-line{
+    margin-top:auto; display:flex; align-items:center; gap:6px;
+    font-size:0.74rem; color:var(--blue); font-weight:600;
+  }
+  .service-card.wide{grid-column:span 2;}
+  .icon-blue{background:rgba(28,99,183,0.1);}
+  .icon-orange{background:rgba(232,114,44,0.1);}
+
+  /* ---------- BOOKING (ticket) ---------- */
+  .booking{background:var(--navy); position:relative; overflow:hidden;}
+  .booking::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 85% 20%, rgba(28,99,183,0.35), transparent 55%),
+               radial-gradient(circle at 10% 85%, rgba(232,114,44,0.22), transparent 50%);
+  }
+  .booking .wrap{position:relative;}
+  .booking .section-head h2, .booking .section-head p{color:#fff;}
+  .booking .section-head p{color:#B9C8D8;}
+  .booking .section-head .mono.tag{color:var(--orange-light);}
+
+  .ticket{
+    display:grid; grid-template-columns:0.85fr 1.15fr;
+    background:#fff; border-radius:20px; overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.5);
+  }
+  .ticket-stub{
+    background:linear-gradient(165deg, var(--blue) 0%, var(--navy) 100%);
+    color:#fff; padding:40px 34px;
+    position:relative;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .ticket-stub .hole{
+    position:absolute; top:50%; right:-13px; transform:translateY(-50%);
+    width:26px; height:26px; background:var(--navy); border-radius:50%;
+  }
+  .ticket-perf{
+    position:absolute; top:0; bottom:0; right:0;
+    border-right:2px dashed rgba(255,255,255,0.35);
+  }
+  .ticket-stub .mono.tag{color:var(--orange-light); font-size:0.7rem; margin-bottom:10px; display:block;}
+  .ticket-stub h3{color:#fff; font-size:1.4rem; margin-bottom:14px;}
+  .ticket-stub p{font-size:0.86rem; color:#C6D3E0; line-height:1.6; margin-bottom:24px;}
+  .ticket-meta{display:flex; flex-direction:column; gap:14px;}
+  .ticket-meta .row{display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:10px;}
+  .ticket-meta .row span:first-child{font-size:0.72rem; color:#9FB3C6;}
+  .ticket-meta .row span:last-child{font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:#fff;}
+
+  .ticket-form{padding:40px 38px;}
+  .ticket-form h4{font-size:1.05rem; margin-bottom:24px; color:var(--navy);}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .form-field{display:flex; flex-direction:column; gap:6px; margin-bottom:18px;}
+  .form-field.full{grid-column:1 / -1;}
+  .form-field label{font-size:0.76rem; font-weight:600; color:var(--slate-dark);}
+  .form-field input, .form-field select, .form-field textarea{
+    border:1.5px solid var(--line); border-radius:10px; padding:11px 13px;
+    font-family:'Inter',sans-serif; font-size:0.9rem; color:var(--slate-dark);
+    background:var(--ice);
+    transition:border-color 0.15s ease;
+  }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus{
+    border-color:var(--blue); outline:none; background:#fff;
+  }
+  .form-field textarea{resize:vertical; min-height:76px;}
+  .ticket-form .btn-primary{width:100%; justify-content:center; padding:14px; font-size:0.95rem;}
+  .form-note{font-size:0.72rem; color:var(--slate); margin-top:12px; text-align:center;}
+
+  .confirm-panel{
+    display:none; text-align:center; padding:20px 6px 4px;
+  }
+  .confirm-panel.show{display:block;}
+  .confirm-panel .check{
+    width:50px; height:50px; border-radius:50%; background:rgba(91,217,138,0.15);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 16px;
+  }
+  .confirm-panel h4{margin-bottom:8px;}
+  .confirm-panel p{font-size:0.88rem; color:var(--slate); margin-bottom:14px;}
+  .confirm-panel .ticket-id{
+    font-family:'IBM Plex Mono',monospace; font-size:0.9rem; color:var(--blue);
+    background:var(--ice); border:1px dashed var(--line); border-radius:10px;
+    padding:10px 16px; display:inline-block; margin-bottom:18px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#081C31; color:#B9C8D8; padding:60px 0 28px;}
+  .footer-grid{
+    display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:40px; margin-bottom:44px;
+  }
+  .footer-brand{display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  .footer-brand img{height:36px; width:36px;}
+  .footer-brand span{font-family:'Space Grotesk',sans-serif; font-weight:700; color:#fff;}
+  footer p.desc{font-size:0.86rem; line-height:1.6; max-width:280px;}
+  footer h5{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:#fff; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px;}
+  footer ul{list-style:none; display:flex; flex-direction:column; gap:11px;}
+  footer ul a{font-size:0.86rem; color:#B9C8D8;}
+  footer ul a:hover{color:var(--orange-light);}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.1); padding-top:24px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:0.76rem; color:#7C90A4;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    nav.links{display:none;}
+    .menu-toggle{display:block;}
+    .hero-inner{grid-template-columns:1fr; padding-top:56px;}
+    .hero-visual{order:-1; margin-bottom:10px;}
+    .device-card{max-width:340px;}
+    .trust-inner{grid-template-columns:repeat(2,1fr);}
+    .services-grid{grid-template-columns:1fr;}
+    .service-card.wide{grid-column:span 1;}
+    .ticket{grid-template-columns:1fr;}
+    .ticket-perf{display:none;}
+    .form-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr; gap:28px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+    <img src="quickfixLogo.png" alt="QuickFix Logo">     
+      <span>QUICK<em>FIX</em></span>
+    </a>
+    <nav class="links">
+      <a href="#services">Services</a>
+      <a href="#book">Book a Repair</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#book" class="btn btn-primary">Book Now</a>
+    <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow mono">Fast, honest mobile repair</span>
+      <h1>Your phone breaks. <span class="split">We fix the break.</span></h1>
+      <p class="lede">From cracked screens to sluggish software, QuickFix gets your device back to full speed — with honest pricing and technicians who show their work.</p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn btn-primary">Book a Repair</a>
+        <a href="#services" class="btn btn-outline-light">View Services</a>
+      </div>
+      <div class="hero-badges">
+        <div class="hero-badge"><span class="num mono">Same-Day</span><span class="lab">Most repairs completed same day</span></div>
+        <div class="hero-badge"><span class="num mono">Genuine Parts</span><span class="lab">Quality-checked components</span></div>
+        <div class="hero-badge"><span class="num mono">All Devices</span><span class="lab">Phones &amp; tablets, any brand</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust-strip">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4z" stroke="#1C63B7" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#E8722C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><div class="t">Warranty included</div><div class="s">On every repair we complete</div></div>
+    </div>
+    <div class="trust-item">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#1C63B7" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="#E8722C" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <div><div class="t">Fast turnaround</div><div class="s">Most fixes done same day</div></div>
+    </div>
+    <div class="trust-item">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h10" stroke="#1C63B7" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <div><div class="t">Upfront pricing</div><div class="s">No surprises at pickup</div></div>
+    </div>
+    <div class="trust-item">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-9C1 8 2.6 4.5 6 4.5c2 0 3.3 1.1 4 2.2.7-1.1 2-2.2 4-2.2 3.4 0 5 3.5 3.5 7.5-2.5 4.5-9.5 9-9.5 9z" stroke="#E8722C" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <div><div class="t">Trusted technicians</div><div class="s">Careful with every device</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono tag">what we repair</span>
+      <h2>Every service your device needs</h2>
+      <p>From a shattered screen to a phone that just feels slow, our bench covers the full range of mobile repair and upkeep.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon icon-blue">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="6" y="2" width="12" height="20" rx="2.2" stroke="#1C63B7" stroke-width="1.6"/><path d="M9 5l3 6-2 2 4 6" stroke="#E8722C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Screen Repair</h3>
+        <p>Cracked glass, dead pixels, or an unresponsive display — we replace it with a precision-fit screen and test touch response before handoff.</p>
+        <span class="tag-line">Most jobs: 30–60 min →</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon icon-orange">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="16" height="8" rx="1.6" stroke="#E8722C" stroke-width="1.6"/><rect x="19.5" y="10.5" width="2.5" height="3" rx="0.6" fill="#E8722C"/><path d="M7 12h2M10.5 12h2" stroke="#E8722C" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Battery Replacement</h3>
+        <p>Losing charge fast or shutting down unexpectedly? We swap in a quality-checked battery and calibrate it for accurate charge readings.</p>
+        <span class="tag-line">Most jobs: 20–40 min →</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon icon-blue">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#1C63B7" stroke-width="1.6"/><path d="M12 3v2.2M12 18.8V21M21 12h-2.2M5.2 12H3M18.4 5.6l-1.5 1.5M7.1 16.9l-1.5 1.5M18.4 18.4l-1.5-1.5M7.1 7.1L5.6 5.6" stroke="#E8722C" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Software Fixing</h3>
+        <p>Frozen apps, boot loops, or a phone that's simply misbehaving. We diagnose and resolve software issues without touching your files.</p>
+        <span class="tag-line">Most jobs: same day →</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon icon-orange">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 20l5-5M9 15L18 6a2 2 0 0 0-3-3L6 12l-2 7 7-2z" stroke="#E8722C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Cleaning &amp; Maintenance</h3>
+        <p>Dust in the ports, grime on the frame, a fan working overtime — a full internal and external clean to keep your device running cool.</p>
+        <span class="tag-line">Most jobs: 15–25 min →</span>
+      </div>
+
+      <div class="service-card wide">
+        <div class="service-icon icon-blue">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="9" height="6" rx="1.4" stroke="#1C63B7" stroke-width="1.6"/><path d="M11 9h4l4 2v2h-8" stroke="#1C63B7" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="16" r="1.8" stroke="#E8722C" stroke-width="1.5"/><circle cx="16.5" cy="16" r="1.8" stroke="#E8722C" stroke-width="1.5"/></svg>
+        </div>
+        <h3>Accessories Selling</h3>
+        <p>Cases, tempered glass, chargers, and cables — pick up quality accessories on the spot when you drop off or collect your device.</p>
+        <span class="tag-line">In stock, ready to go →</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section booking" id="book">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono tag">book a repair</span>
+      <h2>Start your repair ticket</h2>
+      <p>Tell us about your device and the issue — we'll confirm your drop-off window and give you an estimate before any work begins.</p>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-stub">
+        <div class="ticket-perf"></div>
+        <div class="hole"></div>
+        <div>
+          <span class="mono tag">Service Ticket</span>
+          <h3>What to expect</h3>
+          <p>Once you submit your details, we'll reach out to confirm a time and walk you through pricing — no work starts without your OK.</p>
+        </div>
+        <div class="ticket-meta">
+          <div class="row"><span>Step 1</span><span>Tell us the issue</span></div>
+          <div class="row"><span>Step 2</span><span>We confirm &amp; quote</span></div>
+          <div class="row"><span>Step 3</span><span>Drop off or send in</span></div>
+        </div>
+      </div>
+
+      <div class="ticket-form">
+        <form id="bookingForm">
+          <h4>Repair request details</h4>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="fname">Full name</label>
+              <input type="text" id="fname" required placeholder="Jane Rivera">
+            </div>
+            <div class="form-field">
+              <label for="fphone">Phone number</label>
+              <input type="tel" id="fphone" required placeholder="(555) 123-4567">
+            </div>
+            <div class="form-field">
+              <label for="fdevice">Device &amp; model</label>
+              <input type="text" id="fdevice" required placeholder="e.g. iPhone 13, Galaxy S22">
+            </div>
+            <div class="form-field">
+              <label for="fservice">Service needed</label>
+              <select id="fservice" required>
+                <option value="">Select a service</option>
+                <option>Screen Repair</option>
+                <option>Battery Replacement</option>
+                <option>Software Fixing</option>
+                <option>Cleaning &amp; Maintenance</option>
+                <option>Accessories</option>
+                <option>Not sure / other</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="fdate">Preferred date</label>
+              <input type="date" id="fdate" required>
+            </div>
+            <div class="form-field">
+              <label for="ftime">Preferred time</label>
+              <select id="ftime" required>
+                <option value="">Select a time</option>
+                <option>Morning (9am–12pm)</option>
+                <option>Afternoon (12pm–4pm)</option>
+                <option>Evening (4pm–7pm)</option>
+              </select>
+            </div>
+            <div class="form-field full">
+              <label for="fissue">Describe the issue</label>
+              <textarea id="fissue" placeholder="e.g. Screen cracked in the corner, touch still works fine"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit Repair Request</button>
+          <p class="form-note">We'll contact you to confirm — this form doesn't charge you anything.</p>
+        </form>
+
+        <div class="confirm-panel" id="confirmPanel">
+          <div class="check">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 7" stroke="#2FA866" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h4>Request received</h4>
+          <p>We'll call or text you shortly to confirm your appointment.</p>
+          <span class="ticket-id" id="ticketId"></span>
+          <div>
+            <button class="btn btn-ghost" id="newRequestBtn" type="button">Submit another request</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="quickfixLogo.png" alt="QuickFix Logo">         
+          <span>QUICKFIX</span>
+        </div>
+        <p class="desc">Mobile repair services for phones and tablets — screens, batteries, software, and more, done right the first time.</p>
+      </div>
+      <div>
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Screen Repair</a></li>
+          <li><a href="#services">Battery Replacement</a></li>
+          <li><a href="#services">Software Fixing</a></li>
+          <li><a href="#services">Cleaning &amp; Maintenance</a></li>
+          <li><a href="#services">Accessories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Get in touch</h5>
+        <ul>
+          <li>Add your store address</li>
+          <li>Add your phone number</li>
+          <li>Add your email address</li>
+          <li>Mon–Sat, 9am–7pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 QuickFix Mobile Repair Services. All rights reserved.</span>
+      <span>Built with care for every device that walks through the door.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('bookingForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const id = 'QF-' + Math.floor(1000 + Math.random()*9000);
+    document.getElementById('ticketId').textContent = 'Ticket ' + id;
+    this.style.display = 'none';
+    document.getElementById('confirmPanel').classList.add('show');
+  });
+  document.getElementById('newRequestBtn').addEventListener('click', function(){
+    document.getElementById('confirmPanel').classList.remove('show');
+    const form = document.getElementById('bookingForm');
+    form.reset();
+    form.style.display = 'block';
+  });
+  document.querySelector('.menu-toggle').addEventListener('click', function(){
+    const nav = document.querySelector('nav.links');
+    const open = nav.style.display === 'flex';
+    nav.style.display = open ? 'none' : 'flex';
+    nav.style.cssText += open ? '' : 'position:absolute; top:100%; left:0; right:0; background:#fff; flex-direction:column; padding:20px 24px; border-bottom:1px solid #DCE4EC; display:flex;';
+  });
+</script>
+
+</body>
+</html>
